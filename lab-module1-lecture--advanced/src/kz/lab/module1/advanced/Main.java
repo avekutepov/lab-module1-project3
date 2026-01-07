@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         taskImmutable();
-        //taskRecord();
+        taskRecord();
         taskLambda();
     }
 
@@ -67,10 +67,26 @@ public class Main {
         //  поля должны быть immutable
 
         Set<String> items = new HashSet<>(Set.of("a", "b", "c"));
-        Order order = new Order(100, -30, LocalDateTime.now().plusDays(10), items); // можно ввести некорректные данные
-        System.out.println(order);
-        order.items().add("d"); // можно изменить поле рекорда
-        System.out.println(order);
+
+        try{
+            Order order = new Order(100, -30, LocalDateTime.now().plusDays(10), items);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Order order = new Order(100, 30, LocalDateTime.now().plusDays(10), items);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Order order = new Order(100, 30, LocalDateTime.now().minusDays(10), items);
+            System.out.println(order);
+            order.items().add("d");
+        }catch (Exception e){
+            System.out.println(e.getClass().getSimpleName());
+        }
     }
 
     private static void taskLambda() {
@@ -83,7 +99,7 @@ public class Main {
         );
 
         // todo: реализовать отправку имейлов вставив имена в заголовок
-        //sendEmails(...);
+        sendEmails(title, content, customers, email -> System.out.println(email));
 
         // Вывод в консоль
         // Email[to=bob@gmail.com, title=hi Bob, body=happy new year!]
@@ -92,8 +108,8 @@ public class Main {
     }
 
     public static void sendEmails(String title, String content, List<Customer> customers, EmailSender emailSender) {
-//        customers.stream()
-//                .map(...)
-//                .forEach(...);
+        customers.stream()
+                .map(c -> new Email(c.email(), title + c.name(), content))
+                .forEach(emailSender::send);
     }
 }
