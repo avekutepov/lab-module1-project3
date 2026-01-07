@@ -7,6 +7,10 @@ public final class Student {
     private final String phone;
 
     public Student (int id, String name, String phone) {
+        if(id < 0){throw new IllegalArgumentException("id can't be negative");}
+        if(name == null || name.isBlank()){throw new IllegalArgumentException("Name is empty");}
+        if(phone == null || phone.isBlank()){throw new IllegalArgumentException("Phone is empty");}
+
         this.id = id;
         this.name = name;
         this.phone =phone;

@@ -30,6 +30,25 @@ public class Main {
         //student.setName("Ivan");
 
         // должно работать - после исправления раскомментировать
+
+        try{
+            Student student2 = new Student(-100, "Vasya", "235432436543");
+        }catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Student student2 = new Student(2, "", "235432436543");
+        }catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Student student2 = new Student(3, "Vasya", null);
+        }catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
         Student student1 = new Student(1, "Ivan", "70022244505");
 
         // должно выводить в читаемом виде
