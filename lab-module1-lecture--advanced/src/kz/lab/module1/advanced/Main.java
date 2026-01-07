@@ -12,7 +12,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //taskImmutable();
+        taskImmutable();
         //taskRecord();
         taskLambda();
     }
@@ -24,16 +24,16 @@ public class Main {
 
 
         // не должно работать - после исправления закомментировать
-        Student student = new Student();
+        //Student student = new Student();
 
         // не должно работать - после исправления закомментировать
-        student.setName("Ivan");
+        //student.setName("Ivan");
 
         // должно работать - после исправления раскомментировать
-        //Student student1 = new Student(1, "Ivan", "70022244505");
+        Student student1 = new Student(1, "Ivan", "70022244505");
 
         // должно выводить в читаемом виде
-        //System.out.println(student1.toString());
+        System.out.println(student1.toString());
 
         // не должно работать
         // наследование запрещено чтобы избежать проблем с equals()
